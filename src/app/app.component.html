@@ -1,70 +1,72 @@
 <p-dialog header="Eredmény" [(visible)]="displayModal" (onHide)="setNextQuestions()" [modal]="true" [responsive]="true"
   [transitionOptions]="'200ms'" [style]="{width: '350px', minWidth: '200px'}" [minY]="70">
-  <h1></h1>
   {{modalText}}
-  <h1></h1>
   <p-footer>
     <button type="button" pButton icon="pi pi-check" (click)="displayModal=false" label="Ok"></button>
   </p-footer>
 </p-dialog>
-<div class="p-grid p-justify-center">
-  <p-panel class="p-lg-6 p-md-10 p-sm-12 p-col-12">
-    <p-header style="text-align:center">
-      <h1>Matematika feladatok</h1>
-      <h2>II. osztályos tanulók számára</h2>
-      <h1></h1>
-    </p-header>
-    <h1></h1>
-    <div *ngIf="!testStarted" class="p-grid p-justify-center">
-      <div>
+<div class="container-fluid">
+  <div class="row align-items-center flex-column">
+    <p-panel class="col-lg-6 col-md-10 col-sm-12 col-12">
+      <p-header style="text-align:center">
+        <h2>Matematika feladatok</h2>
+        <h3>II. osztályos tanulók számára</h3>
+        <h2></h2>
+      </p-header>
+      <h2></h2>
+      <div class="row align-items-center flex-column" *ngIf="!testStarted">
         <span class="ui-float-label">
           <input type="text" [(ngModel)]="userName" [disabled]="testStarted" pInputText>
           <label for="float-input">Mi a neved?</label>
         </span>
+        <h2></h2>
+        <button pButton type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (click)="startTest()"></button>
       </div>
-      <div>
-        <p-button type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (onClick)="startTest()"></p-button>
-      </div>
-    </div>
-    <div *ngIf="testStarted">
-      <div style="text-align:center">
-        <h2><strong>Szia {{userName}} !</strong></h2>
-        <h2><strong>{{currentQuestionIndex}}. feladat.</strong></h2>
-        <h2>Számold ki az eredményt!</h2>
-        <h1></h1>
-        <div [ngSwitch]="missingPlace">
-          <div *ngSwitchCase="MISSING_PLACE.FIRST">
-            <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished" pInputText>
-            <span class="bigFont">{{operation}}</span>
-            <span class="bigFont">{{secondNumber}}</span>
-            <span class="bigFont"> = </span>
-            <span class="bigFont">{{thirdNumber}}</span>
-            <h1></h1>
+      <div *ngIf="testStarted">
+        <div style="text-align:center">
+          <h3><strong>Szia {{userName}} !</strong></h3>
+          <h2>&nbsp;</h2>
+          <h3><strong>{{currentQuestionIndex}}. feladat.</strong></h3>
+          <h2>&nbsp;</h2>
+          <h3>Számold ki az eredményt!</h3>
+          <h2>&nbsp;</h2>
+          <div [ngSwitch]="missingPlace">
+            <div *ngSwitchCase="MISSING_PLACE.FIRST">
+              <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+                pInputText>
+              <span class="bigFont">{{operation}}</span>
+              <span class="bigFont">{{secondNumber}}</span>
+              <span class="bigFont"> = </span>
+              <span class="bigFont">{{thirdNumber}}</span>
+              <h2>&nbsp;</h2>
+            </div>
+            <div *ngSwitchCase="MISSING_PLACE.SECOND">
+              <span class="bigFont">{{firstNumber}}</span>
+              <span class="bigFont">{{operation}}</span>
+              <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+                pInputText>
+              <span class="bigFont"> = </span>
+              <span class="bigFont">{{thirdNumber}}</span>
+              <h2>&nbsp;</h2>
+            </div>
+            <div *ngSwitchCase="MISSING_PLACE.THIRD">
+              <span class="bigFont">{{firstNumber}}</span>
+              <span class="bigFont">{{operation}}</span>
+              <span class="bigFont">{{secondNumber}}</span>
+              <span class="bigFont"> = </span>
+              <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+                pInputText>
+              <h2>&nbsp;</h2>
+            </div>
           </div>
-          <div *ngSwitchCase="MISSING_PLACE.SECOND">
-            <span class="bigFont">{{firstNumber}}</span>
-            <span class="bigFont">{{operation}}</span>
-            <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished" pInputText>
-            <span class="bigFont"> = </span>
-            <span class="bigFont">{{thirdNumber}}</span>
-            <h1></h1>
-          </div>
-          <div *ngSwitchCase="MISSING_PLACE.THIRD">
-            <span class="bigFont">{{firstNumber}}</span>
-            <span class="bigFont">{{operation}}</span>
-            <span class="bigFont">{{secondNumber}}</span>
-            <span class="bigFont"> = </span>
-            <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished" pInputText>
-            <h1></h1>
-          </div>
-        </div>
 
-        <p-button type="button" label="Ok" (onClick)="checkSolution()" [disabled]="testFinished"></p-button>
-        <h1></h1>
-        <h2>{{endResult}}</h2>
-        <h1></h1>
-        <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
+          <button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>
+          <h2>&nbsp;</h2>
+          <h3>{{endResult}}</h3>
+          <h2>&nbsp;</h2>
+          <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
+        </div>
       </div>
-    </div>
-  </p-panel>
+    </p-panel>
+  </div>
 </div>
