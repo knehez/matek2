@@ -7,13 +7,14 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FormsModule, DialogModule, ButtonModule, InputTextModule, CardModule,
+    BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, DialogModule, ButtonModule, InputTextModule, CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

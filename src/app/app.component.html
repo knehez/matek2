@@ -8,65 +8,63 @@
   </p-footer>
 </p-dialog>
 <div class="p-grid">
-  <div class="p-col">
-    <div style="text-align:center">
-      <h1>
-        Matematika feladatok
-      </h1>
+  <p-panel class="p-col-6 p-offset-3">
+    <p-header style="text-align:center">
+      <h1>Matematika feladatok</h1>
       <h2>II. osztályos tanulók számára</h2>
       <h1></h1>
-    </div>
-    <div>
-      <table class="ui table form" style="width:600px; margin-left: auto; margin-right: auto;">
-        <tr>
-          <td>
-            <h3>Írd be a neved</h3>
-          </td>
-          <td>
-            <div class="field">
-              <input type="text" [(ngModel)]="userName" size="20" [disabled]="testStarted" pInputText>
-            </div>
-          </td>
-          <td>
-            <p-button type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (onClick)="startTest()"></p-button>
-          </td>
-        </tr>
-      </table>
-    </div>
+    </p-header>
     <h1></h1>
-    <div style="text-align:center" *ngIf="testStarted">
-      <h2>{{endResult}}</h2>
-    </div>
-    <h1></h1>
-    <div *ngIf="testStarted">
-      <table align="center">
-        <tr>
-          <td align="center">
-            <h2><strong>{{currentQuestionIndex}}. feladat.</strong></h2>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h2>Számold ki az eredményt!</h2>
-          </td>
-        </tr>
-      </table>
-      <h1></h1>
-      <div style="text-align:center">
-        <span style="font-size: 2.3em;">{{currentQuestion}} = </span>
-        <input type="text" style="font-size: 2.3em;" [(ngModel)]="currentSolution" size="2" [disabled]="testFinished"
-          pInputText>
-        <h1></h1>
-        <p-button type="button" label="Ok" (onClick)="checkSolution()" [disabled]="testFinished"></p-button>
+    <div *ngIf="!testStarted" class="ui-g ui-fluid p-offset-3">
+      <div class="ui-g-12 ui-md-6">
+        <span class="ui-float-label">
+          <input type="text" [(ngModel)]="userName" size="10" [disabled]="testStarted" pInputText>
+          <label for="float-input">Mi a neved?</label>
+        </span>
       </div>
-      <h1></h1>
-      <table align="center">
-        <tr>
-          <td>
-            <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
-          </td>
-        </tr>
-      </table>
+      <div class="ui-g-12 ui-md-6">
+        <p-button type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (onClick)="startTest()"></p-button>
+      </div>
     </div>
-  </div>
+    <div *ngIf="testStarted">
+      <div style="text-align:center">
+        <h2><strong>Szia {{userName}} !</strong></h2>
+        <h2><strong>{{currentQuestionIndex}}. feladat.</strong></h2>
+        <h2>Számold ki az eredményt!</h2>
+        <h1></h1>
+        <div [ngSwitch]="missingPlace">
+          <div *ngSwitchCase="MISSING_PLACE.FIRST">
+            <input type="text" class="bigFont" [(ngModel)]="userSolution" size="2" [disabled]="testFinished" pInputText>
+            <span class="bigFont">{{operation}}</span>
+            <span class="bigFont">{{secondNumber}}</span>
+            <span class="bigFont"> = </span>
+            <span class="bigFont">{{thirdNumber}}</span>
+            <h1></h1>
+          </div>
+          <div *ngSwitchCase="MISSING_PLACE.SECOND">
+            <span class="bigFont">{{firstNumber}}</span>
+            <span class="bigFont">{{operation}}</span>
+            <input type="text" class="bigFont" [(ngModel)]="userSolution" size="2" [disabled]="testFinished" pInputText>
+            <span class="bigFont"> = </span>
+            <span class="bigFont">{{thirdNumber}}</span>
+            <h1></h1>
+          </div>
+          <div *ngSwitchCase="MISSING_PLACE.THIRD">
+            <span class="bigFont">{{firstNumber}}</span>
+            <span class="bigFont">{{operation}}</span>
+            <span class="bigFont">{{secondNumber}}</span>
+            <span class="bigFont"> = </span>
+            <input type="text" class="bigFont" [(ngModel)]="userSolution" size="2" [disabled]="testFinished" pInputText>
+            <h1></h1>
+          </div>
+        </div>
+
+        <p-button type="button" label="Ok" (onClick)="checkSolution()" [disabled]="testFinished"></p-button>
+        <h1></h1>
+        <h2>{{endResult}}</h2>
+        <h1></h1>
+        <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
+      </div>
+    </div>
+  </p-panel>
 </div>

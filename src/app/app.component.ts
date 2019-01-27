@@ -1,22 +1,27 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
+export enum MISSING_PLACE {
+  FIRST,
+  SECOND,
+  THIRD
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   userName = '';
   testStarted: Boolean = false;
   taskNumber = 1;
-  questionsInTest = 20;
+  questionsInTest = 5;
   correctAnswers = 0;
   testFinished = false;
-  currentQuestion = '';
   currentQuestionIndex = 0;
   solution;
-  currentSolution;
+  userSolution;
   currentCorrectAnswer = -1;
   timerStream;
   correctSet = [];
@@ -25,6 +30,13 @@ export class AppComponent {
   endResult = '';
   modalText = '';
   displayModal = false;
+  missingPlace: MISSING_PLACE;
+  // in order to use the enum in the html template
+  MISSING_PLACE = MISSING_PLACE;
+  firstNumber: number;
+  secondNumber: number;
+  thirdNumber: number;
+  operation = '';
 
   constructor() { }
 
@@ -34,7 +46,6 @@ export class AppComponent {
   }
 
   public startTest() {
-    // this.ngxSmartModalService.setModalData(this.modalText, 'modalText');
     if (this.testStarted) {
       return;
     }
@@ -67,7 +78,7 @@ export class AppComponent {
     // 60 másodperctől számol vissza
     this.countdown = 60 * 1000 - t * 1000;
     if (this.countdown === 0) {
-      this.currentSolution = 'timeout';
+      this.userSolution = 'timeout';
       this.checkSolution();
     }
   }
@@ -75,10 +86,10 @@ export class AppComponent {
   checkSolution() {
     this.timerStream.unsubscribe();
 
-    if (parseInt(this.currentSolution, 10) === this.currentCorrectAnswer) {
+    if (parseInt(this.userSolution, 10) === this.currentCorrectAnswer) {
       this.modalText = 'A válasz helyes!';
       this.correctAnswers++;
-    } else if (this.currentSolution === 'timeout') {
+    } else if (this.userSolution === 'timeout') {
       this.modalText = 'Lejárt az idő!';
     } else {
       this.modalText = 'Sajnos a válasz helytelen!';
@@ -88,6 +99,10 @@ export class AppComponent {
   }
 
   setNextQuestions() {
+    if (this.testFinished) {
+      return;
+    }
+
     if (this.currentQuestionIndex === this.questionsInTest) {
       this.testFinished = true;
       this.modalText = 'Vége a tesztnek';
@@ -100,32 +115,45 @@ export class AppComponent {
     this.currentQuestionIndex++;
 
     let result = -1;
-    let firstNumber: number, secondNumber: number;
-    const randomoperation = this.getRandomOperation();
+    this.operation = this.getRandomElement([' + ', ' - '])[0];
 
     while (result < 1 || result > 99) {
-      firstNumber = Math.floor(Math.random() * 99) + 1;
-      secondNumber = Math.floor(Math.random() * 99) + 1;
-      switch (randomoperation[0]) {
-        case '+':
-          result = firstNumber + secondNumber;
+      this.firstNumber = Math.floor(Math.random() * 99) + 1;
+      this.secondNumber = Math.floor(Math.random() * 99) + 1;
+      switch (this.operation) {
+        case ' + ':
+          result = this.firstNumber + this.secondNumber;
           break;
-        case '-':
-          result = firstNumber - secondNumber;
+        case ' - ':
+          result = this.firstNumber - this.secondNumber;
           break;
         default:
           result = -1;
       }
     }
-    this.currentQuestion = firstNumber + ' ' + randomoperation[0] + ' ' + secondNumber;
-    this.solution = result;
-    this.currentSolution = '';
-    this.currentCorrectAnswer = result;
+
+    this.thirdNumber = result;
+
+    switch (this.getRandomElement([1, 2, 3])[0]) {
+      case 1:
+        this.missingPlace = MISSING_PLACE.FIRST;
+        this.currentCorrectAnswer = this.firstNumber;
+        break;
+      case 2:
+        this.missingPlace = MISSING_PLACE.SECOND;
+        this.currentCorrectAnswer = this.secondNumber;
+        break;
+      case 3:
+        this.missingPlace = MISSING_PLACE.THIRD;
+        this.currentCorrectAnswer = this.thirdNumber;
+        break;
+    }
+
+    this.userSolution = '';
     this.startCountdownTimer();
   }
 
-  getRandomOperation() {
-    const operations = ['+', '-'];
+  getRandomElement(operations: Array<any>) {
     return operations.sort(() => .5 - Math.random());
   }
 }
