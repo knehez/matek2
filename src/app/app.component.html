@@ -7,22 +7,22 @@
     <button type="button" pButton icon="pi pi-check" (click)="displayModal=false" label="Ok"></button>
   </p-footer>
 </p-dialog>
-<div class="p-grid">
-  <p-panel class="p-col-6 p-offset-3">
+<div class="p-grid p-justify-center">
+  <p-panel class="p-col-8">
     <p-header style="text-align:center">
       <h1>Matematika feladatok</h1>
       <h2>II. osztályos tanulók számára</h2>
       <h1></h1>
     </p-header>
     <h1></h1>
-    <div *ngIf="!testStarted" class="ui-g ui-fluid p-offset-3">
-      <div class="ui-g-12 ui-md-6">
+    <div *ngIf="!testStarted" class="p-grid p-justify-center">
+      <div class="col-g-12 col-md-6">
         <span class="ui-float-label">
-          <input type="text" [(ngModel)]="userName" size="10" [disabled]="testStarted" pInputText>
+          <input type="text" [(ngModel)]="userName" [disabled]="testStarted" pInputText>
           <label for="float-input">Mi a neved?</label>
         </span>
       </div>
-      <div class="ui-g-12 ui-md-6">
+      <div class="col-g-12 col-md-6">
         <p-button type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (onClick)="startTest()"></p-button>
       </div>
     </div>
@@ -34,7 +34,7 @@
         <h1></h1>
         <div [ngSwitch]="missingPlace">
           <div *ngSwitchCase="MISSING_PLACE.FIRST">
-            <input type="text" class="bigFont" [(ngModel)]="userSolution" size="2" [disabled]="testFinished" pInputText>
+            <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished" pInputText>
             <span class="bigFont">{{operation}}</span>
             <span class="bigFont">{{secondNumber}}</span>
             <span class="bigFont"> = </span>
@@ -44,7 +44,7 @@
           <div *ngSwitchCase="MISSING_PLACE.SECOND">
             <span class="bigFont">{{firstNumber}}</span>
             <span class="bigFont">{{operation}}</span>
-            <input type="text" class="bigFont" [(ngModel)]="userSolution" size="2" [disabled]="testFinished" pInputText>
+            <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished" pInputText>
             <span class="bigFont"> = </span>
             <span class="bigFont">{{thirdNumber}}</span>
             <h1></h1>
@@ -54,7 +54,7 @@
             <span class="bigFont">{{operation}}</span>
             <span class="bigFont">{{secondNumber}}</span>
             <span class="bigFont"> = </span>
-            <input type="text" class="bigFont" [(ngModel)]="userSolution" size="2" [disabled]="testFinished" pInputText>
+            <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished" pInputText>
             <h1></h1>
           </div>
         </div>
