@@ -41,7 +41,7 @@ export class AppComponent {
   constructor() { }
 
   get result(): string {
-    return 'Eredmény: ' + this.questionsInTest + '-ből ' + this.correctAnswers + ' jó válasz = ' +
+    return 'Eredmény: ' + this.questionsInTest + ' / ' + this.correctAnswers + ' jó válasz = ' +
       + (this.correctAnswers * 100 / this.questionsInTest).toPrecision(2) + ' %';
   }
 

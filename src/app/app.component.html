@@ -25,11 +25,9 @@
       <div *ngIf="testStarted">
         <div style="text-align:center">
           <h3><strong>Szia {{userName}} !</strong></h3>
-          <h2>&nbsp;</h2>
           <h3><strong>{{currentQuestionIndex}}. feladat.</strong></h3>
-          <h2>&nbsp;</h2>
           <h3>Számold ki az eredményt!</h3>
-          <h2>&nbsp;</h2>
+          <h4>&nbsp;</h4>
           <div [ngSwitch]="missingPlace">
             <div *ngSwitchCase="MISSING_PLACE.FIRST">
               <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
@@ -62,9 +60,8 @@
 
           <button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>
           <h2>&nbsp;</h2>
-          <h3>{{endResult}}</h3>
-          <h2>&nbsp;</h2>
-          <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
+          <h4>{{endResult}}</h4>
+          <div>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</div>
         </div>
       </div>
     </p-panel>
