@@ -16,7 +16,7 @@ export class AppComponent {
   userName = '';
   testStarted: Boolean = false;
   taskNumber = 1;
-  questionsInTest = 5;
+  questionsInTest = 20;
   correctAnswers = 0;
   testFinished = false;
   currentQuestionIndex = 0;
