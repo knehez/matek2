@@ -8,7 +8,7 @@
   </p-footer>
 </p-dialog>
 <div class="p-grid p-justify-center">
-  <p-panel class="p-col-8">
+  <p-panel class="p-lg-6 p-md-10 p-sm-12 p-col-12">
     <p-header style="text-align:center">
       <h1>Matematika feladatok</h1>
       <h2>II. osztályos tanulók számára</h2>
@@ -16,13 +16,13 @@
     </p-header>
     <h1></h1>
     <div *ngIf="!testStarted" class="p-grid p-justify-center">
-      <div class="col-g-12 col-md-6">
+      <div>
         <span class="ui-float-label">
           <input type="text" [(ngModel)]="userName" [disabled]="testStarted" pInputText>
           <label for="float-input">Mi a neved?</label>
         </span>
       </div>
-      <div class="col-g-12 col-md-6">
+      <div>
         <p-button type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (onClick)="startTest()"></p-button>
       </div>
     </div>
