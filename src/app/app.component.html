@@ -1,68 +1,72 @@
-<div class="ui container main">
-  <ngx-smart-modal #alertModal identifier="alertModal" (onClose)="setNextQuestions()" (onDismiss)="setNextQuestions()" customClass="nsm-dialog-animation-ttb nsm-centered">
-    <h1></h1>
-    <h1>{{modalText}}</h1>
-    <h1></h1>
-    <button class="ui positive basic button center" (click)="alertModal.close()">Ok</button>
-  </ngx-smart-modal>
-
-  <div style="text-align:center">
-    <h1>
-      Matematika feladatok
-    </h1>
-    <h2>II. osztályos tanulók számára</h2>
-    <h1></h1>
-  </div>
-  <div>
-    <table class="ui table form" style="width:600px; margin-left: auto; margin-right: auto;">
-      <tr>
-        <td>
-          <h3>Írd be a neved</h3>
-        </td>
-        <td>
-          <div class="field">
-            <input type="text" [(ngModel)]="userName" size="20" [disabled]="testStarted">
-          </div>
-        </td>
-        <td>
-          <input type="button" class="ui positive basic button" [disabled]="userName.length < 2" value="Teszt indítása"
-            (click)="startTest()">
-        </td>
-      </tr>
-    </table>
-  </div>
+<p-dialog header="Eredmény" [(visible)]="displayModal" (onHide)="setNextQuestions()" [modal]="true" [responsive]="true"
+  [transitionOptions]="'200ms'" [style]="{width: '350px', minWidth: '200px'}" [minY]="70">
   <h1></h1>
-  <div style="text-align:center" *ngIf="testStarted">
-    <h2>{{endResult}}</h2>
-  </div>
+  {{modalText}}
   <h1></h1>
-  <div *ngIf="testStarted">
-    <table align="center">
-      <tr>
-        <td align="center">
-          <h2><strong>{{currentQuestionIndex}}. feladat.</strong></h2>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h2>Számold ki az eredményt!</h2>
-        </td>
-      </tr>
-    </table>
-    <h1></h1>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="displayModal=false" label="Ok"></button>
+  </p-footer>
+</p-dialog>
+<div class="p-grid">
+  <div class="p-col">
     <div style="text-align:center">
-      <span style="font-size: 2.3em;">{{currentQuestion}} = </span>
-      <input type="text" style="font-size: 2.3em;" [(ngModel)]="currentSolution" size="2" [disabled]="testFinished">
+      <h1>
+        Matematika feladatok
+      </h1>
+      <h2>II. osztályos tanulók számára</h2>
       <h1></h1>
-      <input type="button" class="ui positive basic button" value="Ok" (click)="checkSolution()" [disabled]="testFinished">
+    </div>
+    <div>
+      <table class="ui table form" style="width:600px; margin-left: auto; margin-right: auto;">
+        <tr>
+          <td>
+            <h3>Írd be a neved</h3>
+          </td>
+          <td>
+            <div class="field">
+              <input type="text" [(ngModel)]="userName" size="20" [disabled]="testStarted" pInputText>
+            </div>
+          </td>
+          <td>
+            <p-button type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (onClick)="startTest()"></p-button>
+          </td>
+        </tr>
+      </table>
     </div>
     <h1></h1>
-    <table align="center">
-      <tr>
-        <td>
-          <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
-        </td>
-      </tr>
-    </table>
+    <div style="text-align:center" *ngIf="testStarted">
+      <h2>{{endResult}}</h2>
+    </div>
+    <h1></h1>
+    <div *ngIf="testStarted">
+      <table align="center">
+        <tr>
+          <td align="center">
+            <h2><strong>{{currentQuestionIndex}}. feladat.</strong></h2>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h2>Számold ki az eredményt!</h2>
+          </td>
+        </tr>
+      </table>
+      <h1></h1>
+      <div style="text-align:center">
+        <span style="font-size: 2.3em;">{{currentQuestion}} = </span>
+        <input type="text" style="font-size: 2.3em;" [(ngModel)]="currentSolution" size="2" [disabled]="testFinished"
+          pInputText>
+        <h1></h1>
+        <p-button type="button" label="Ok" (onClick)="checkSolution()" [disabled]="testFinished"></p-button>
+      </div>
+      <h1></h1>
+      <table align="center">
+        <tr>
+          <td>
+            <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>

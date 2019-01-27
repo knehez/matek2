@@ -1,10 +1,5 @@
-import { Component, ViewContainerRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/timer';
-import 'rxjs/add/operator/finally';
-import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/map';
-import { NgxSmartModalService } from 'ngx-smart-modal';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -29,8 +24,9 @@ export class AppComponent {
   countdown = 0;
   endResult = '';
   modalText = '';
+  displayModal = false;
 
-  constructor(public ngxSmartModalService: NgxSmartModalService) { }
+  constructor() { }
 
   get result(): string {
     return 'Eredmény: ' + this.questionsInTest + '-ből ' + this.correctAnswers + ' jó válasz = ' +
@@ -40,8 +36,6 @@ export class AppComponent {
   public startTest() {
     // this.ngxSmartModalService.setModalData(this.modalText, 'modalText');
     if (this.testStarted) {
-      this.modalText = 'A teszt már elindult, nem lehet újra indítani. \n Újrakezdéshez töltsd újra a lapot.';
-      this.ngxSmartModalService.getModal('alertModal').open();
       return;
     }
     this.testStarted = true;
@@ -90,14 +84,14 @@ export class AppComponent {
       this.modalText = 'Sajnos a válasz helytelen!';
     }
 
-    this.ngxSmartModalService.getModal('alertModal').open();
+    this.displayModal = true;
   }
 
   setNextQuestions() {
     if (this.currentQuestionIndex === this.questionsInTest) {
       this.testFinished = true;
       this.modalText = 'Vége a tesztnek';
-      this.ngxSmartModalService.getModal('alertModal').open();
+      this.displayModal = true;
       const timer = Observable.timer(0, 1000);
       this.timerStream = timer.subscribe(t => this.tickerFuncSecureResults(t));
       return;
