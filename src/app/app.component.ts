@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 export enum MISSING_PLACE {
@@ -13,6 +13,7 @@ export enum MISSING_PLACE {
 })
 
 export class AppComponent {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   userName = '';
   testStarted: Boolean = false;
   taskNumber = 1;
@@ -53,6 +54,11 @@ export class AppComponent {
 
     this.currentQuestionIndex = 0;
     this.setNextQuestions();
+    setTimeout(() => {
+      try {
+        this.myScrollContainer.nativeElement.scrollIntoView(false);
+      } catch (err) { console.log(err); }
+    }, 500);
   }
 
   startCountdownTimer() {
