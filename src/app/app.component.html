@@ -26,39 +26,57 @@
         <div style="text-align:center">
           <h3><strong>Szia {{userName}} !</strong></h3>
           <h3><strong>{{currentQuestionIndex}}. feladat.</strong></h3>
-          <h3>Számold ki az eredményt!</h3>
           <h4>&nbsp;</h4>
-          <div [ngSwitch]="missingPlace">
-            <div *ngSwitchCase="MISSING_PLACE.FIRST">
-              <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
-                pInputText>
-              <span class="bigFont">{{operation}}</span>
-              <span class="bigFont">{{secondNumber}}</span>
-              <span class="bigFont"> = </span>
-              <span class="bigFont">{{thirdNumber}}</span>
-              <h2>&nbsp;</h2>
+          <div [ngSwitch]="taskType">
+            <div *ngSwitchCase="TASK_TYPE.RELATIONS">
+              <div [ngSwitch]="taskType">
+                  <span class="bigFont">{{firstNumber}}</span>
+                  <span class="bigFont">{{operation1}}</span>
+                  <span class="bigFont">{{secondNumber}}</span>
+                  <span class="bigFont"> ? </span>
+                  <span class="bigFont">{{thirdNumber}}</span>
+                  <span class="bigFont">{{operation2}}</span>
+                  <span class="bigFont">{{forthNumber}}</span>
+                  <h2>&nbsp;</h2>
+                  <button pButton type="button" class="bigButton m-2" label="<" (click)="checkSolution('<')" [disabled]="testFinished"></button>
+                  <button pButton type="button" class="bigButton m-2" label="=" (click)="checkSolution('=')" [disabled]="testFinished"></button>
+                  <button pButton type="button" class="bigButton m-2" label=">" (click)="checkSolution('>')" [disabled]="testFinished"></button>
+              </div>
             </div>
-            <div *ngSwitchCase="MISSING_PLACE.SECOND">
-              <span class="bigFont">{{firstNumber}}</span>
-              <span class="bigFont">{{operation}}</span>
-              <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
-                pInputText>
-              <span class="bigFont"> = </span>
-              <span class="bigFont">{{thirdNumber}}</span>
-              <h2>&nbsp;</h2>
-            </div>
-            <div *ngSwitchCase="MISSING_PLACE.THIRD">
-              <span class="bigFont">{{firstNumber}}</span>
-              <span class="bigFont">{{operation}}</span>
-              <span class="bigFont">{{secondNumber}}</span>
-              <span class="bigFont"> = </span>
-              <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
-                pInputText>
-              <h2>&nbsp;</h2>
+            <div *ngSwitchCase="TASK_TYPE.SIMPLE_PLUS_MINUS">
+              <div [ngSwitch]="missingPlace">
+                <div *ngSwitchCase="MISSING_PLACE.FIRST">
+                  <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+                    pInputText>
+                  <span class="bigFont">{{operation1}}</span>
+                  <span class="bigFont">{{secondNumber}}</span>
+                  <span class="bigFont"> = </span>
+                  <span class="bigFont">{{thirdNumber}}</span>
+                  <h2>&nbsp;</h2>
+                </div>
+                <div *ngSwitchCase="MISSING_PLACE.SECOND">
+                  <span class="bigFont">{{firstNumber}}</span>
+                  <span class="bigFont">{{operation1}}</span>
+                  <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+                    pInputText>
+                  <span class="bigFont"> = </span>
+                  <span class="bigFont">{{thirdNumber}}</span>
+                  <h2>&nbsp;</h2>
+                </div>
+                <div *ngSwitchCase="MISSING_PLACE.THIRD">
+                  <span class="bigFont">{{firstNumber}}</span>
+                  <span class="bigFont">{{operation1}}</span>
+                  <span class="bigFont">{{secondNumber}}</span>
+                  <span class="bigFont"> = </span>
+                  <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+                    pInputText>
+                  <h2>&nbsp;</h2>
+                </div>
+              </div>
+              <button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>
             </div>
           </div>
 
-          <button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>
           <h2>&nbsp;</h2>
           <h4>{{endResult}}</h4>
           <div>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</div>
