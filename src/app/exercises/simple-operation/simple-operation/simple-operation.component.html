@@ -1,0 +1,30 @@
+<div [ngSwitch]="missingPlace">
+  <div *ngSwitchCase="'FIRST'">
+    <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+      pInputText>
+    <span class="bigFont">{{operation}}</span>
+    <span class="bigFont">{{secondNumber}}</span>
+    <span class="bigFont"> = </span>
+    <span class="bigFont">{{thirdNumber}}</span>
+    <h2>&nbsp;</h2>
+  </div>
+  <div *ngSwitchCase="'SECOND'">
+    <span class="bigFont">{{firstNumber}}</span>
+    <span class="bigFont">{{operation}}</span>
+    <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+      pInputText>
+    <span class="bigFont"> = </span>
+    <span class="bigFont">{{thirdNumber}}</span>
+    <h2>&nbsp;</h2>
+  </div>
+  <div *ngSwitchCase="'THIRD'">
+    <span class="bigFont">{{firstNumber}}</span>
+    <span class="bigFont">{{operation}}</span>
+    <span class="bigFont">{{secondNumber}}</span>
+    <span class="bigFont"> = </span>
+    <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+      pInputText>
+    <h2>&nbsp;</h2>
+  </div>
+</div>
+<button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>

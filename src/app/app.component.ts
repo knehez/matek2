@@ -1,13 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
-enum MISSING_PLACE {
-  FIRST,
-  SECOND,
-  THIRD
-}
-
-enum TASK_TYPE {
+export enum TASK_TYPE {
   SIMPLE_PLUS_MINUS,
   RELATIONS
 }
@@ -20,6 +14,8 @@ enum TASK_TYPE {
 
 export class AppComponent {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  eventsSubject: Subject<void> = new Subject<void>();
+
   userName = '';
   testStarted: Boolean = false;
   taskNumber = 1;
@@ -31,23 +27,13 @@ export class AppComponent {
   userSolution;
   currentCorrectAnswer = '';
   timerStream;
-  correctSet = [];
-  wrongSet = [];
   countdown = 0;
   endResult = '';
   modalText = '';
   displayModal = false;
-  missingPlace: MISSING_PLACE;
   taskType: TASK_TYPE;
   // in order to use the enum in the html template
-  MISSING_PLACE = MISSING_PLACE;
   TASK_TYPE = TASK_TYPE;
-  firstNumber: number;
-  secondNumber: number;
-  thirdNumber: number;
-  forthNumber: number;
-  operation1 = '';
-  operation2 = '';
 
   constructor() { }
 
@@ -99,6 +85,12 @@ export class AppComponent {
     }
   }
 
+  gotSolution($event) {
+    this.userSolution = $event.userSolution;
+    this.currentCorrectAnswer = $event.correctAnswer;
+    this.checkSolution();
+  }
+
   checkSolution(answer?: string) {
     if (answer !== undefined) {
       this.userSolution = answer;
@@ -135,105 +127,11 @@ export class AppComponent {
     this.currentQuestionIndex++;
 
     this.taskType = this.getRandomElement([TASK_TYPE.SIMPLE_PLUS_MINUS, TASK_TYPE.RELATIONS])[0];
-    this.operation1 = this.getRandomElement([' + ', ' - '])[0];
-    this.operation2 = this.getRandomElement([' + ', ' - '])[0];
-
-    switch (this.taskType) {
-      case TASK_TYPE.SIMPLE_PLUS_MINUS:
-        this.generateSimplePlusMinusExercise();
-        break;
-      case TASK_TYPE.RELATIONS:
-        this.generateRelationsExercise();
-        break;
-    }
 
     this.userSolution = '';
     this.startCountdownTimer();
-  }
-
-  generateRelationsExercise() {
-    let result1 = -1;
-
-    while (result1 < 1 || result1 > 99) {
-      this.firstNumber = Math.floor(Math.random() * 99) + 1;
-      this.secondNumber = Math.floor(Math.random() * 99) + 1;
-      switch (this.operation1) {
-        case ' + ':
-          result1 = this.firstNumber + this.secondNumber;
-          break;
-        case ' - ':
-          result1 = this.firstNumber - this.secondNumber;
-          break;
-        default:
-          result1 = -1;
-      }
-    }
-
-    let result2 = -1;
-
-    while (result2 < 1 || result2 > 99) {
-      this.thirdNumber = Math.floor(Math.random() * 99) + 1;
-      this.forthNumber = Math.floor(Math.random() * 99) + 1;
-      switch (this.operation2) {
-        case ' + ':
-          result2 = this.thirdNumber + this.forthNumber;
-          break;
-        case ' - ':
-          result2 = this.thirdNumber - this.forthNumber;
-          break;
-        default:
-          result2 = -1;
-      }
-    }
-
-    if (result1 < result2) {
-      this.currentCorrectAnswer = '<';
-    }
-
-    if (result1 > result2) {
-      this.currentCorrectAnswer = '>';
-    }
-
-    if (result1 === result2) {
-      this.currentCorrectAnswer = '=';
-    }
-
-  }
-
-  generateSimplePlusMinusExercise() {
-    let result = -1;
-
-    while (result < 1 || result > 99) {
-      this.firstNumber = Math.floor(Math.random() * 99) + 1;
-      this.secondNumber = Math.floor(Math.random() * 99) + 1;
-      switch (this.operation1) {
-        case ' + ':
-          result = this.firstNumber + this.secondNumber;
-          break;
-        case ' - ':
-          result = this.firstNumber - this.secondNumber;
-          break;
-        default:
-          result = -1;
-      }
-    }
-
-    this.thirdNumber = result;
-
-    switch (this.getRandomElement([1, 2, 3])[0]) {
-      case 1:
-        this.missingPlace = MISSING_PLACE.FIRST;
-        this.currentCorrectAnswer = '' + this.firstNumber;
-        break;
-      case 2:
-        this.missingPlace = MISSING_PLACE.SECOND;
-        this.currentCorrectAnswer = '' + this.secondNumber;
-        break;
-      case 3:
-        this.missingPlace = MISSING_PLACE.THIRD;
-        this.currentCorrectAnswer = '' + this.thirdNumber;
-        break;
-    }
+    this.testFinished = false;
+    this.eventsSubject.next();
   }
 
   getRandomElement(elements: Array<any>) {

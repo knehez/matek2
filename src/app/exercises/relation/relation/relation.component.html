@@ -1,0 +1,11 @@
+<span class="bigFont">{{firstNumber}}</span>
+<span class="bigFont">{{operation1}}</span>
+<span class="bigFont">{{secondNumber}}</span>
+<span class="bigFont"> ? </span>
+<span class="bigFont">{{thirdNumber}}</span>
+<span class="bigFont">{{operation2}}</span>
+<span class="bigFont">{{forthNumber}}</span>
+<h2>&nbsp;</h2>
+<button pButton type="button" class="bigButton m-2" label="<" (click)="checkSolution('<')" [disabled]="testFinished"></button>
+<button pButton type="button" class="bigButton m-2" label="=" (click)="checkSolution('=')" [disabled]="testFinished"></button>
+<button pButton type="button" class="bigButton m-2" label=">" (click)="checkSolution('>')" [disabled]="testFinished"></button>
