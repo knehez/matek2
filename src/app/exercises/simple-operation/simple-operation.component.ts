@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { AppComponent } from '../../../app.component';
 import { Observable } from 'rxjs/Rx';
 
 @Component({

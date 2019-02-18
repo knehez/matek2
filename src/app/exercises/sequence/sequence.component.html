@@ -1,0 +1,7 @@
+<span class="bigFont">{{firstNumber}} ,</span>
+<span class="bigFont"> {{secondNumber}} ,</span>
+<span class="bigFont"> {{thirdNumber}} , </span>
+<input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+  pInputText>
+<h2>&nbsp;</h2>
+<button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>

@@ -8,14 +8,16 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
-import { SimpleOperationComponent } from './exercises/simple-operation/simple-operation/simple-operation.component';
+import { SimpleOperationComponent } from './exercises/simple-operation/simple-operation.component';
 import { RelationComponent } from './exercises/relation/relation/relation.component';
+import { SequenceComponent } from './exercises/sequence/sequence.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SimpleOperationComponent,
-    RelationComponent
+    RelationComponent,
+    SequenceComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, DialogModule, ButtonModule, InputTextModule, CardModule,
