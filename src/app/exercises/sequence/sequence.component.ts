@@ -36,15 +36,32 @@ export class SequenceComponent implements OnInit, OnDestroy {
   generateSequenceExercise() {
     let result = -1;
 
-    while (result < 1 || result > 99) {
-      const increment = Math.floor(Math.random() * 6) + 4;
-      this.firstNumber = Math.floor(Math.random() * 60) + 20;
-      this.secondNumber = this.firstNumber + increment;
-      this.thirdNumber = this.secondNumber + increment;
-      result = this.thirdNumber + increment;
+    switch (this.getRandomElement(['+', '-'])[0]) {
+      case '+':
+        while (result < 1 || result > 99) {
+          const increment = Math.floor(Math.random() * 6) + 4;
+          this.firstNumber = Math.floor(Math.random() * 60) + 20;
+          this.secondNumber = this.firstNumber + increment;
+          this.thirdNumber = this.secondNumber + increment;
+          result = this.thirdNumber + increment;
+        }
+        break;
+      case '-':
+        while (result < 1 || result > 99) {
+          const increment = Math.floor(Math.random() * 6) + 4;
+          this.firstNumber = Math.floor(Math.random() * 60) + 20;
+          this.secondNumber = this.firstNumber - increment;
+          this.thirdNumber = this.secondNumber - increment;
+          result = this.thirdNumber - increment;
+        }
+        break;
     }
 
     this.correctAnswer = '' + result;
     this.userSolution = '';
+  }
+
+  getRandomElement(elements: Array<any>) {
+    return elements.sort(() => .5 - Math.random());
   }
 }
