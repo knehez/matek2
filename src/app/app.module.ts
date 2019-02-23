@@ -9,15 +9,17 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
 import { SimpleOperationComponent } from './exercises/simple-operation/simple-operation.component';
-import { RelationComponent } from './exercises/relation/relation/relation.component';
+import { RelationComponent } from './exercises/relation/relation.component';
 import { SequenceComponent } from './exercises/sequence/sequence.component';
+import { TextualComponent } from './textual/textual.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SimpleOperationComponent,
     RelationComponent,
-    SequenceComponent
+    SequenceComponent,
+    TextualComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, DialogModule, ButtonModule, InputTextModule, CardModule,

@@ -37,6 +37,9 @@
             <div *ngSwitchCase="TASK_TYPE.SEQUENCE">
               <app-sequence [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-sequence>
             </div>
+            <div *ngSwitchCase="TASK_TYPE.TEXTUAL">
+              <app-textual [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-textual>
+            </div>
           </div>
 
           <h2>&nbsp;</h2>

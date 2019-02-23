@@ -4,7 +4,8 @@ import { Observable, Subject } from 'rxjs/Rx';
 export enum TASK_TYPE {
   SIMPLE_PLUS_MINUS,
   RELATIONS,
-  SEQUENCE
+  SEQUENCE,
+  TEXTUAL
 }
 
 @Component({
@@ -127,7 +128,7 @@ export class AppComponent {
 
     this.currentQuestionIndex++;
 
-    this.taskType = this.getRandomElement([TASK_TYPE.SIMPLE_PLUS_MINUS, TASK_TYPE.RELATIONS, TASK_TYPE.SEQUENCE])[0];
+    this.taskType = this.getRandomElement([TASK_TYPE.SIMPLE_PLUS_MINUS, TASK_TYPE.RELATIONS, TASK_TYPE.SEQUENCE, TASK_TYPE.TEXTUAL])[0];
 
     this.userSolution = '';
     this.startCountdownTimer();

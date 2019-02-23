@@ -1,0 +1,8 @@
+<div>
+  <span class="bigFont">{{question}}</span>
+  <h2>&nbsp;</h2>
+  <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+    pInputText>
+</div>
+<h2>&nbsp;</h2>
+<button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>
