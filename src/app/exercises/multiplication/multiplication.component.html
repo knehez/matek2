@@ -1,0 +1,10 @@
+<div>
+    <span class="bigFont">{{firstNumber}}</span>
+    <span class="bigFont"> {{operation}} </span>
+    <span class="bigFont">{{secondNumber}}</span>
+    <span class="bigFont"> = </span>
+    <input type="number" class="bigFont" [(ngModel)]="userSolution" style="width:100px;" [disabled]="testFinished"
+      pInputText>
+    <h2>&nbsp;</h2>
+</div>
+<button pButton type="button" class="bigButton" label="Ok" (click)="checkSolution()" [disabled]="testFinished"></button>

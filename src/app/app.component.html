@@ -40,6 +40,9 @@
             <div *ngSwitchCase="TASK_TYPE.TEXTUAL">
               <app-textual [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-textual>
             </div>
+            <div *ngSwitchCase="TASK_TYPE.MULTIPLICATION">
+              <app-multiplication [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-multiplication>
+            </div>
           </div>
 
           <h2>&nbsp;</h2>

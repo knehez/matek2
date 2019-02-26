@@ -12,6 +12,7 @@ import { SimpleOperationComponent } from './exercises/simple-operation/simple-op
 import { RelationComponent } from './exercises/relation/relation.component';
 import { SequenceComponent } from './exercises/sequence/sequence.component';
 import { TextualComponent } from './textual/textual.component';
+import { MultiplicationComponent } from './exercises/multiplication/multiplication.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TextualComponent } from './textual/textual.component';
     SimpleOperationComponent,
     RelationComponent,
     SequenceComponent,
-    TextualComponent
+    TextualComponent,
+    MultiplicationComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, DialogModule, ButtonModule, InputTextModule, CardModule,
