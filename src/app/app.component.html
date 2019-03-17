@@ -13,6 +13,9 @@
         <h3>II. osztályos tanulók számára</h3>
         <h2></h2>
       </p-header>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+          <p-checkbox label="Csak szorzás és bennfoglalás" [(ngModel)]="multOnly" [disabled]="testStarted"></p-checkbox>
+      </div>
       <h2></h2>
       <div class="row align-items-center flex-column" *ngIf="!testStarted">
         <span class="ui-float-label">
@@ -20,7 +23,8 @@
           <label for="float-input">Mi a neved?</label>
         </span>
         <h2></h2>
-        <button pButton type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása" (click)="startTest()"></button>
+        <button pButton type="button" [disabled]="userName.length < 2 || testStarted" label="Teszt indítása"
+          (click)="startTest()"></button>
       </div>
       <div *ngIf="testStarted">
         <div style="text-align:center">
@@ -29,19 +33,24 @@
           <h4>&nbsp;</h4>
           <div [ngSwitch]="taskType">
             <div *ngSwitchCase="TASK_TYPE.RELATIONS">
-              <app-relation [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-relation>
+              <app-relation [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
+                [testFinished]="testFinished"></app-relation>
             </div>
             <div *ngSwitchCase="TASK_TYPE.SIMPLE_PLUS_MINUS">
-              <app-simple-operation [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-simple-operation>
+              <app-simple-operation [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
+                [testFinished]="testFinished"></app-simple-operation>
             </div>
             <div *ngSwitchCase="TASK_TYPE.SEQUENCE">
-              <app-sequence [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-sequence>
+              <app-sequence [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
+                [testFinished]="testFinished"></app-sequence>
             </div>
             <div *ngSwitchCase="TASK_TYPE.TEXTUAL">
-              <app-textual [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-textual>
+              <app-textual [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
+                [testFinished]="testFinished"></app-textual>
             </div>
             <div *ngSwitchCase="TASK_TYPE.MULTIPLICATION">
-              <app-multiplication [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)" [testFinished]="testFinished"></app-multiplication>
+              <app-multiplication [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
+                [testFinished]="testFinished"></app-multiplication>
             </div>
           </div>
 

@@ -37,7 +37,7 @@ export class AppComponent {
   taskType: TASK_TYPE;
   // in order to use the enum in the html template
   TASK_TYPE = TASK_TYPE;
-
+  multOnly = false;
   constructor() { }
 
   get result(): string {
@@ -132,6 +132,10 @@ export class AppComponent {
     this.taskType = this.getRandomElement([TASK_TYPE.SIMPLE_PLUS_MINUS,
     TASK_TYPE.RELATIONS, TASK_TYPE.SEQUENCE, TASK_TYPE.TEXTUAL, TASK_TYPE.MULTIPLICATION,
     TASK_TYPE.MULTIPLICATION, TASK_TYPE.MULTIPLICATION, TASK_TYPE.MULTIPLICATION])[0];
+
+    if (this.multOnly) {
+      this.taskType = TASK_TYPE.MULTIPLICATION;
+    }
 
     this.userSolution = '';
     this.startCountdownTimer();

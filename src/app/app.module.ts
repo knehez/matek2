@@ -13,6 +13,7 @@ import { RelationComponent } from './exercises/relation/relation.component';
 import { SequenceComponent } from './exercises/sequence/sequence.component';
 import { TextualComponent } from './textual/textual.component';
 import { MultiplicationComponent } from './exercises/multiplication/multiplication.component';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MultiplicationComponent } from './exercises/multiplication/multiplicati
     MultiplicationComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, DialogModule, ButtonModule, InputTextModule, CardModule,
+    BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, 
+    DialogModule, ButtonModule, CheckboxModule, InputTextModule, CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

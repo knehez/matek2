@@ -39,8 +39,8 @@ export class MultiplicationComponent implements OnInit, OnDestroy {
     let result = -1;
 
     this.operation = this.getRandomElement(['*', ':'])[0];
-    this.firstNumber = this.getRandomElement([3, 4, 5, 6, 8])[0];
-    this.secondNumber = this.getRandomElement([5, 6, 7, 8, 9])[0];
+    this.firstNumber = this.getRandomElement([3, 4, 5, 6, 8, 9])[0];
+    this.secondNumber = this.getRandomElement([3, 4, 5, 6, 7, 8, 9])[0];
 
     switch (this.operation) {
       case '*':
