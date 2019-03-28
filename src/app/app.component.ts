@@ -97,6 +97,8 @@ export class AppComponent {
   checkSolution(answer?: string) {
     if (answer !== undefined) {
       this.userSolution = answer;
+    } else {
+      return;
     }
 
     this.timerStream.unsubscribe();
