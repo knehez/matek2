@@ -14,6 +14,7 @@ import { SequenceComponent } from './exercises/sequence/sequence.component';
 import { TextualComponent } from './textual/textual.component';
 import { MultiplicationComponent } from './exercises/multiplication/multiplication.component';
 import {CheckboxModule} from 'primeng/checkbox';
+import { UnitConversionComponent } from './exercises/unit-conversion/unit-conversion.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     RelationComponent,
     SequenceComponent,
     TextualComponent,
-    MultiplicationComponent
+    MultiplicationComponent,
+    UnitConversionComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule, PanelModule, 

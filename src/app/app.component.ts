@@ -6,7 +6,8 @@ export enum TASK_TYPE {
   RELATIONS,
   SEQUENCE,
   TEXTUAL,
-  MULTIPLICATION
+  MULTIPLICATION,
+  UNIT_CONVERSION
 }
 
 @Component({
@@ -16,11 +17,11 @@ export enum TASK_TYPE {
 })
 
 export class AppComponent {
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild('scrollMe', { static: false }) private myScrollContainer: ElementRef;
   eventsSubject: Subject<void> = new Subject<void>();
 
   userName = '';
-  testStarted: Boolean = false;
+  testStarted: boolean = false;
   taskNumber = 1;
   questionsInTest = 20;
   correctAnswers = 0;
@@ -37,11 +38,13 @@ export class AppComponent {
   taskType: TASK_TYPE;
   // in order to use the enum in the html template
   TASK_TYPE = TASK_TYPE;
-  multOnly = false;
-  constructor() { }
 
   get result(): string {
-    return 'Eredmény: ' + this.questionsInTest + ' / ' + this.correctAnswers + ' jó válasz = ' +
+    return 'Eredmény: ' + this.questionsInTest + ' / ' + this.correctAnswers;
+  }
+
+  get resultRate(): string {
+    return 'Jó válaszok: ' +
       + (this.correctAnswers * 100 / this.questionsInTest).toPrecision(2) + ' %';
   }
 
@@ -80,8 +83,8 @@ export class AppComponent {
 
   tickerFunc(t) {
     this.endResult = this.result + this.randomSpaces();
-    // 60 másodperctől számol vissza
-    this.countdown = 60 * 1000 - t * 1000;
+    // 180 másodperctől számol vissza
+    this.countdown = 180 * 1000 - t * 1000;
     if (this.countdown === 0) {
       this.userSolution = 'timeout';
       this.checkSolution();
@@ -133,13 +136,7 @@ export class AppComponent {
 
     this.currentQuestionIndex++;
 
-    this.taskType = this.getRandomElement([TASK_TYPE.SIMPLE_PLUS_MINUS,
-    TASK_TYPE.RELATIONS, TASK_TYPE.SEQUENCE, TASK_TYPE.TEXTUAL, TASK_TYPE.MULTIPLICATION,
-    TASK_TYPE.MULTIPLICATION, TASK_TYPE.MULTIPLICATION, TASK_TYPE.MULTIPLICATION])[0];
-
-    if (this.multOnly) {
-      this.taskType = TASK_TYPE.MULTIPLICATION;
-    }
+    this.taskType = TASK_TYPE.UNIT_CONVERSION;
 
     this.userSolution = '';
     this.startCountdownTimer();

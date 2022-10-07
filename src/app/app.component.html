@@ -9,13 +9,10 @@
   <div class="row align-items-center flex-column">
     <p-panel class="col-lg-6 col-md-10 col-sm-12 col-12">
       <p-header style="text-align:center">
-        <h2>Matematika feladatok</h2>
-        <h3>II. osztályos tanulók számára</h3>
+        <h2>Mértékegység átváltás feladatok</h2>
+        <h3>6. osztályos tanulók számára</h3>
         <h2></h2>
       </p-header>
-      <div class="btn-group btn-group-vertical" data-toggle="buttons">
-          <p-checkbox label="Csak szorzás és bennfoglalás" [(ngModel)]="multOnly" [disabled]="testStarted"></p-checkbox>
-      </div>
       <h2></h2>
       <div class="row align-items-center flex-column" *ngIf="!testStarted">
         <span class="ui-float-label">
@@ -32,30 +29,15 @@
           <h3><strong>{{currentQuestionIndex}}. feladat.</strong></h3>
           <h4>&nbsp;</h4>
           <div [ngSwitch]="taskType">
-            <div *ngSwitchCase="TASK_TYPE.RELATIONS">
-              <app-relation [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
-                [testFinished]="testFinished"></app-relation>
-            </div>
-            <div *ngSwitchCase="TASK_TYPE.SIMPLE_PLUS_MINUS">
-              <app-simple-operation [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
-                [testFinished]="testFinished"></app-simple-operation>
-            </div>
-            <div *ngSwitchCase="TASK_TYPE.SEQUENCE">
-              <app-sequence [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
-                [testFinished]="testFinished"></app-sequence>
-            </div>
-            <div *ngSwitchCase="TASK_TYPE.TEXTUAL">
-              <app-textual [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
-                [testFinished]="testFinished"></app-textual>
-            </div>
-            <div *ngSwitchCase="TASK_TYPE.MULTIPLICATION">
-              <app-multiplication [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
-                [testFinished]="testFinished"></app-multiplication>
+            <div *ngSwitchCase="TASK_TYPE.UNIT_CONVERSION">
+              <app-unit-conversion [event]="eventsSubject.asObservable()" (solutionEvent)="gotSolution($event)"
+                [testFinished]="testFinished"></app-unit-conversion>
             </div>
           </div>
 
           <h2>&nbsp;</h2>
           <h4>{{endResult}}</h4>
+          <h4>{{resultRate}}</h4>
           <div>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</div>
         </div>
       </div>
